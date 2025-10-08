@@ -9,6 +9,11 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  // ✅ allow all hosts during preview
+  preview: {
+    port: 3000,
+    allowedHosts: ["*"], // allow any host
+  },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
