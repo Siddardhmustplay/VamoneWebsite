@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* VAM.one Design System - High-contrast light theme with electric cyan accents */
+
+@layer base {
+  :root {
+    /* Base colors - Clean light canvas */
+    --background: 210 17% 98%;
+    --foreground: 217 33% 7%;
+
+    /* Card colors */
+    --card: 0 0% 100%;
+    --card-foreground: 217 33% 7%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 33% 7%;
+
+    /* Primary - Deep Navy */
+    --primary: 217 33% 7%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Secondary - Light gray */
+    --secondary: 214 32% 94%;
+    --secondary-foreground: 217 33% 7%;
+
+    /* Muted */
+    --muted: 214 32% 94%;
+    --muted-foreground: 215 14% 47%;
+
+    /* Accent - Electric Cyan */
+    --accent: 187 85% 43%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Border and input */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 187 85% 43%;
+
+    /* Radius */
+    --radius: 0.75rem;
+
+    /* Custom gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(187, 85%, 43%), hsl(187, 85%, 53%));
+    --gradient-hero: linear-gradient(180deg, hsl(210, 17%, 98%), hsl(214, 32%, 94%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 24px -4px hsl(217 33% 7% / 0.08);
+    --shadow-strong: 0 10px 40px -8px hsl(217 33% 7% / 0.12);
+    --shadow-glow: 0 0 40px hsl(187 85% 43% / 0.25);
+
+    /* Animation variables */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-['Inter',sans-serif] antialiased;
+    scroll-behavior: smooth;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Advanced scroll reveal animations */
+  .reveal-slide-left {
+    opacity: 0;
+    transform: translateX(-60px) translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .reveal-slide-right {
+    opacity: 0;
+    transform: translateX(60px) translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .reveal-3d-card {
+    opacity: 0;
+    transform: translateY(40px) rotateX(15deg);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .revealed {
+    opacity: 1 !important;
+    transform: translateX(0) translateY(0) rotateX(0) !important;
+  }
+
+  /* Hero text split animation */
+  .hero-text-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: heroReveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes heroReveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Parallax background */
+  .parallax-bg {
+    transform: translateY(var(--parallax-offset, 0));
+    transition: transform 0.1s linear;
+  }
+
+  /* Stagger delays */
+  .stagger-1 { transition-delay: 0.05s; }
+  .stagger-2 { transition-delay: 0.1s; }
+  .stagger-3 { transition-delay: 0.15s; }
+  .stagger-4 { transition-delay: 0.2s; }
+  .stagger-5 { transition-delay: 0.25s; }
+  .stagger-6 { transition-delay: 0.3s; }
+  .stagger-7 { transition-delay: 0.35s; }
+  .stagger-8 { transition-delay: 0.4s; }
+
+  /* Button hover effects */
+  .btn-primary {
+    @apply bg-accent text-white px-8 py-4 rounded-xl font-semibold 
+           transition-all duration-300 hover:shadow-glow hover:scale-105
+           active:scale-95;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary px-8 py-4 rounded-xl font-semibold
+           transition-all duration-300 hover:bg-primary hover:text-white
+           active:scale-95;
+  }
+
+  /* Card styles */
+  .card-elevated {
+    @apply bg-card rounded-2xl p-8 shadow-soft transition-all duration-500
+           hover:shadow-strong hover:-translate-y-2;
+  }
+
+  /* Text gradients */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-primary;
+  }
+
+  /* Perspective for 3D effects */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* Auto-scrolling Clients Carousel */
+  .client-scroll-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .client-scroll-track {
+    display: flex;
+    animation: scroll 40s linear infinite;
+    will-change: transform;
+  }
+
+  .client-scroll-track:hover {
+    animation-play-state: paused;
+  }
+
+  .client-logo-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
+  }
+}
